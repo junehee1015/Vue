@@ -21,6 +21,10 @@
       <button v-on:click="add(10)">Add 10</button>
       <button v-on:click="reduce(5)">Reduce 5</button>
       <p>Result: {{ counter }}</p>
+      <!-- <input type="text" v-on:input="setName"> -->
+      <!-- 인자가 있을 경우 event인자를 $event로 받을 수 있다. -->
+      <input type="text" v-on:input="setName($event, '입니다.')">
+      <p>Your Name: {{ name }}</p>
     </section>
   </body>
 </html>
