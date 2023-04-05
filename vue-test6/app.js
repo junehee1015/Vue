@@ -8,15 +8,15 @@ const app = Vue.createApp({
   },
   methods: {
     boxSelected(box) {
-      if(box === 'A') {
-        this.boxASelected = true;
-      }else if(box === 'B') {
-        this.boxBSelected = true;
-      }else {
-        this.boxCSelected = true;
+      if (box === "A") {
+        this.boxASelected = !this.boxASelected;
+      } else if (box === "B") {
+        this.boxBSelected = !this.boxBSelected;
+      } else {
+        this.boxCSelected = !this.boxCSelected;
       }
-    }
-  }
+    },
+  },
 });
 
-app.mount('#styling');
+app.mount("#styling");

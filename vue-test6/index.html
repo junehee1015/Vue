@@ -17,9 +17,23 @@
       <h1>Vue Dynamic Styling</h1>
     </header>
     <section id="styling">
-      <div :style="{borderColor: boxASelected ? 'red' : '#ccc'}" @click="boxSelected('A')" class="demo"></div>
-      <div :style="{borderColor: boxBSelected ? 'red' : '#ccc'}" @click="boxSelected('B')" class="demo"></div>
-      <div :style="{borderColor: boxCSelected ? 'red' : '#ccc'}" @click="boxSelected('C')" class="demo"></div>
+      <!-- inline style은 잘사용하지 않기 때문에 동적으로 class를 추가해주는 것이 좋다. -->
+      <!-- :class="{className: true/false}"를 바인딩하여 동적으로 class를 추가해줄 수 있다. -->
+      <div
+        class="demo"
+        :class="{selected: boxASelected}"
+        @click="boxSelected('A')"
+      ></div>
+      <div
+        class="demo"
+        :class="{selected: boxBSelected}"
+        @click="boxSelected('B')"
+      ></div>
+      <div
+        class="demo"
+        :class="{selected: boxCSelected}"
+        @click="boxSelected('C')"
+      ></div>
     </section>
   </body>
 </html>
