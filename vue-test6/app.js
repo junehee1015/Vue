@@ -6,6 +6,8 @@ const app = Vue.createApp({
       boxCSelected: false,
     };
   },
+
+  // computed를 사용하여 추가될 class 로직을 다양하게 만들 수 있다.
   computed: {
     boxAClasses() {
       return { selected: this.boxASelected };
