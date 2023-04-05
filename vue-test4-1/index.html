@@ -18,6 +18,13 @@
     </header>
     <section id="events">
       <h2>Events in Action</h2>
+      <!-- 
+        축약어
+        - 축약어를 사용하던 안하던 템플릿 내에 모두 동일한 방법으로 사용해야한다.
+
+        v-on:click -> @click
+        v-bind:value -> :value
+       -->
       <button v-on:click="add(10)">Add 10</button>
       <button v-on:click="reduce(5)">Subtract 5</button>
       <p>Result: {{ counter }}</p>

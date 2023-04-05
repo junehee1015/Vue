@@ -6,6 +6,16 @@ const app = Vue.createApp({
     };
   },
 
+  // data의 데이터를 method를 사용하면 데이터가 변경될 때 method가 실행된다.
+  // 인자로 해당 데이터의 값을 받을 수 있다.
+  watch: {
+    counter(value) {
+      if(value > 50) {
+        this.counter = 0;
+      }
+    }
+  },
+
   // 종속 대상이 변경되기 전까지 호출되지 않는다.
   computed: {
     plus() {
