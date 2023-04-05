@@ -19,19 +19,20 @@
     <section id="styling">
       <!-- inline style은 잘사용하지 않기 때문에 동적으로 class를 추가해주는 것이 좋다. -->
       <!-- :class="{className: true/false}"를 바인딩하여 동적으로 class를 추가해줄 수 있다. -->
+      <!-- computed를 사용하여 추가 될 class를 관리할 수 있다. -->
       <div
         class="demo"
-        :class="{selected: boxASelected}"
+        :class="boxAClasses"
         @click="boxSelected('A')"
       ></div>
       <div
         class="demo"
-        :class="{selected: boxBSelected}"
+        :class="boxBClasses"
         @click="boxSelected('B')"
       ></div>
       <div
         class="demo"
-        :class="{selected: boxCSelected}"
+        :class="boxCClasses"
         @click="boxSelected('C')"
       ></div>
     </section>
