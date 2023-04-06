@@ -22,7 +22,14 @@
       <button @click="addGoal">Add Goal</button>
       <p v-if="goals.length === 0">goals have been added yet - please start adding some!</p>
       <ul v-else>
-        <li v-for="(goal, index) in goals">{{ goal }} - {{ index }}</li>
+
+        <!-- :key key속성을 바인딩해주면 요소의 고유 식별 용도로 작용한다. -->
+        <li v-for="(goal, index) in goals" @click="removeGoal(index)" :key="goal">
+          <p>{{ goal }} - {{ index }}</p>
+
+          <!-- @click.stop = 부모의 event를 막아준다. -->
+          <input type="text" @click.stop>
+        </li>
       </ul>
 
       <!-- 숫자를 이용한 v-for문 -->
