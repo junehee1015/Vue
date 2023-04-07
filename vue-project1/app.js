@@ -10,6 +10,7 @@ const app = Vue.createApp({
       monsterHealth: 100,
       round: 0,
       winner: null,
+      logMsg: []
     };
   },
   watch: {
@@ -47,6 +48,7 @@ const app = Vue.createApp({
       this.monsterHealth = 100;
       this.round = 0;
       this.winner = null;
+      this.logMsg = [];
     },
     attackMonster() {
       // 세 번째 턴마다 specialAttack을 하기 위해 round 수를 알아야한다.
@@ -56,17 +58,21 @@ const app = Vue.createApp({
       const attackValue = getRandomValue(5, 12);
       this.monsterHealth -= attackValue;
 
+      this.addLogMsg('player', 'attack', attackValue);
+      
       // Monster를 공격하면 Player도 반격당해야하기 때문에 attackPlayer method를 호출해준다.
       this.attackPlayer();
     },
     attackPlayer() {
       const attackValue = getRandomValue(8, 15);
       this.playerHealth -= attackValue;
+      this.addLogMsg('monster', 'attack', attackValue);
     },
     specialAttackMonster() {
       this.round++;
       const attackValue = getRandomValue(10, 25);
       this.monsterHealth -= attackValue;
+      this.addLogMsg('player', 'attack', attackValue);
       this.attackPlayer();
     },
     healPlayer() {
@@ -74,8 +80,24 @@ const app = Vue.createApp({
       const healValue = getRandomValue(10, 20);
       this.playerHealth += healValue;
       this.playerHealth = this.playerHealth > 100 ? 100 : this.playerHealth;
+      this.addLogMsg('player', 'heal', healValue);
       this.attackPlayer();
     },
+    surrender() {
+      const isSurrender = confirm('항복하시겠습니까?');
+
+      if(isSurrender) {
+        this.winner = 'monster';
+      }
+    },
+    addLogMsg(who, what, value) {
+      // 최신 log를 가장 처음으로 보여주기 위해서 push 대신 unshift 사용.
+      this.logMsg.unshift({
+        actionBy: who,
+        actionType: what,
+        actionValue: value,
+      });
+    }
   },
 });
 
