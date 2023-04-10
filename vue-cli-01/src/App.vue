@@ -10,19 +10,13 @@
       <friend-contact
         v-for="friend in friends"
         :key="friend.id"
+        :id="friend.id"
         :name="friend.name"
         :phone-number="friend.phone"
         :email-adress="friend.email"
         :is-favorite="friend.isFavorite"
+        @toggle-favorite="favoriteStatus"
       ></friend-contact>
-
-
-      <!-- <friend-contact
-        name = 'Julie Jones'
-        phone-number = '09876 543 221'
-        email-adress = 'julie@localhost.com'
-        is-favorite = "0"
-      ></friend-contact> -->
     </ul>
   </section>
 </template>
@@ -47,6 +41,12 @@ export default {
         },
       ]
     };
+  },
+  methods: {
+    favoriteStatus(friendId) {
+      const checkFriendId = this.friends.find(friend => friend.id === friendId);
+      checkFriendId.isFavorite = !checkFriendId.isFavorite;
+    }
   }
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <li>
-    <h2>{{ name }} {{ isFavoriteData ? '(Favorite)' : '' }}</h2>
+    <h2>{{ name }} {{ isFavorite ? '(Favorite)' : '' }}</h2>
     <button @click="toggleDetail">{{ visibleDetail ? 'Hide' : 'Show' }} Detail</button>
     <button @click="toggleFavorite">Toggle Favorite</button>
     <ul v-if="visibleDetail">
@@ -11,33 +11,46 @@
 </template>
 <script>
 export default {
-  // props: [
-  //   'name',
-  //   'phoneNumber',
-  //   'emailAdress',
-  //   // 받아온 Props의 값은 변경할 수 없다.
-  //   // Vue는 단방향 데이터 플로우의 개념을 사용하기 때문이다.
-  //   // 그러나 다른 데이터에 넣어서 값을 변경하여 사용하는 것은 가능하다.
-  //   'isFavorite'
-  // ],
   props: {
-    name: String,         // 축약
-    phoneNumber: String,
-
-    emailAdress: {        // 상세
+    id: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    phoneNumber: {
+      type: String,
+      required: true,
+    },
+    emailAdress: {
       type: String,
       required: true,
     },
     isFavorite: {
-      type: Boolean,                // data type
-      required: false,             // 필수인지 아닌지
-      default: false,                // 기본값
+      type: Boolean,   // data type
+      required: false, // 필수인지 아닌지
+      default: false,  // 기본값
+    },
+  },
+
+  // emits는 필수는 아니지만 권장사항이다.
+  // 어떤 event가 동작했는지, 어떤 event에 data가 잘 넘어갔는지 확인할 수 있다.
+  emits: {
+    'toggle-favorite': function(id) {
+      // return id ? true : false;
+      if(id) {
+        return true;
+      }else {
+        console.warn('id data를 넘겨주세요.');
+        return false;
+      }
     },
   },
   data() {
     return {
       visibleDetail: false,
-      isFavoriteData: this.isFavorite,
     };
   },
   methods: {
@@ -45,7 +58,8 @@ export default {
       this.visibleDetail = !this.visibleDetail;
     },
     toggleFavorite() {
-      this.isFavoriteData = !this.isFavoriteData;
+      // $emit: 자식 Component에서 부모 Component로 data를 보내는 메서드
+      this.$emit('toggle-favorite', this.id);
     }
   }
 }
