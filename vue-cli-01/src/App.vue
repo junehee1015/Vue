@@ -3,6 +3,7 @@
     <header>
       <h1>My Friends</h1>
     </header>
+    <new-friend @add-contact="addContact"></new-friend>
     <ul>
       <!-- v-bind로 문자열이 아닌 값을 전달할 수 있다.  -->
       <!-- v-bind로 동적으로 Props를 전달할 수 있다.  -->
@@ -16,6 +17,7 @@
         :email-adress="friend.email"
         :is-favorite="friend.isFavorite"
         @toggle-favorite="favoriteStatus"
+        @delete="deleteContact"
       ></friend-contact>
     </ul>
   </section>
@@ -46,6 +48,19 @@ export default {
     favoriteStatus(friendId) {
       const checkFriendId = this.friends.find(friend => friend.id === friendId);
       checkFriendId.isFavorite = !checkFriendId.isFavorite;
+    },
+    addContact(getName, getPhone, getEmail) {
+      const newFriendContact = {
+        id: new Date().toISOString(),
+        name: getName,
+        phone: getPhone,
+        email: getEmail,
+        isFavorite: false,
+      };
+      this.friends.push(newFriendContact);
+    },
+    deleteContact(friendId) {
+      this.friends = this.friends.filter(friend => friend.id !== friendId);
     }
   }
 };
@@ -81,7 +96,8 @@ header {
   list-style: none;
 }
 
-#app li {
+#app li,
+#app form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   margin: 1rem auto;
   border-radius: 10px;
@@ -115,4 +131,19 @@ header {
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
 }
 
+#app input {
+  font: inherit;
+  padding: 0.15rem;
+}
+
+#app label {
+  font-weight: bold;
+  margin-right: 1rem;
+  width: 7rem;
+  display: inline-block;
+}
+
+#app form div {
+  margin: 1rem 0;
+}
 </style>

@@ -1,12 +1,13 @@
 <template>
   <li>
     <h2>{{ name }} {{ isFavorite ? '(Favorite)' : '' }}</h2>
-    <button @click="toggleDetail">{{ visibleDetail ? 'Hide' : 'Show' }} Detail</button>
-    <button @click="toggleFavorite">Toggle Favorite</button>
+    <button @click="toggleDetail">{{ visibleDetail ? 'Hide' : 'Show' }} Detail</button><br>
+    <button @click="toggleFavorite">Toggle Favorite</button><br>
     <ul v-if="visibleDetail">
       <li><strong>Phone: </strong> {{ phoneNumber }}</li>
       <li><strong>email: </strong> {{ emailAdress }}</li>
     </ul>
+    <button @click="$emit('delete', id)">Delete</button>
   </li>
 </template>
 <script>
@@ -37,17 +38,18 @@ export default {
 
   // emits는 필수는 아니지만 권장사항이다.
   // 어떤 event가 동작했는지, 어떤 event에 data가 잘 넘어갔는지 확인할 수 있다.
-  emits: {
-    'toggle-favorite': function(id) {
-      // return id ? true : false;
-      if(id) {
-        return true;
-      }else {
-        console.warn('id data를 넘겨주세요.');
-        return false;
-      }
-    },
-  },
+  emits: ['toggle-favorite', 'delete'],
+  // emits: {
+  //   'toggle-favorite': function(id) {
+  //     // return id ? true : false;
+  //     if(id) {
+  //       return true;
+  //     }else {
+  //       console.warn('id data를 넘겨주세요.');
+  //       return false;
+  //     }
+  //   },
+  // },
   data() {
     return {
       visibleDetail: false,
