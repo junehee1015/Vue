@@ -1,6 +1,6 @@
 <template>
   <li>
-    <h2>{{ name }} {{ isFavoriteData === '1' ? '(Favorite)' : '' }}</h2>
+    <h2>{{ name }} {{ isFavoriteData ? '(Favorite)' : '' }}</h2>
     <button @click="toggleDetail">{{ visibleDetail ? 'Hide' : 'Show' }} Detail</button>
     <button @click="toggleFavorite">Toggle Favorite</button>
     <ul v-if="visibleDetail">
@@ -23,18 +23,15 @@ export default {
   props: {
     name: String,         // 축약
     phoneNumber: String,
-    
+
     emailAdress: {        // 상세
       type: String,
       required: true,
     },
     isFavorite: {
-      type: String,                // data type
+      type: Boolean,                // data type
       required: false,             // 필수인지 아닌지
-      default: '0',                // 기본값
-      validator: function(value) { // data 유효성 검사
-        return value === '1' || value === '0';
-      }
+      default: false,                // 기본값
     },
   },
   data() {
@@ -48,7 +45,7 @@ export default {
       this.visibleDetail = !this.visibleDetail;
     },
     toggleFavorite() {
-      this.isFavoriteData = this.isFavoriteData === '1' ? '0' : '1';
+      this.isFavoriteData = !this.isFavoriteData;
     }
   }
 }

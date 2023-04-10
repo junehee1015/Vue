@@ -4,18 +4,25 @@
       <h1>My Friends</h1>
     </header>
     <ul>
+      <!-- v-bind로 문자열이 아닌 값을 전달할 수 있다.  -->
+      <!-- v-bind로 동적으로 Props를 전달할 수 있다.  -->
+      <!-- v-for를 사용해서 동적으로 Props를 전달할 수 있다. -->
       <friend-contact
-        name = 'Manuel Lorenz'
-        phone-number = '01234 5678 991'
-        email-adress = 'manuel@localhost.com'
-        is-favorite = "1"
+        v-for="friend in friends"
+        :key="friend.id"
+        :name="friend.name"
+        :phone-number="friend.phone"
+        :email-adress="friend.email"
+        :is-favorite="friend.isFavorite"
       ></friend-contact>
-      <friend-contact
+
+
+      <!-- <friend-contact
         name = 'Julie Jones'
         phone-number = '09876 543 221'
         email-adress = 'julie@localhost.com'
         is-favorite = "0"
-      ></friend-contact>
+      ></friend-contact> -->
     </ul>
   </section>
 </template>
@@ -28,13 +35,15 @@ export default {
           id: 'manuel',
           name: 'Manuel Lorenz',
           phone: '01234 5678 991',
-          email: 'manuel@localhost.com'
+          email: 'manuel@localhost.com',
+          isFavorite: true,
         },
         {
           id: 'julie',
           name: 'Julie Jones',
           phone: '09876 543 221',
-          email: 'julie@localhost.com'
+          email: 'julie@localhost.com',
+          isFavorite: false,
         },
       ]
     };
