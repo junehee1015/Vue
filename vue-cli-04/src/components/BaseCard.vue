@@ -17,6 +17,10 @@
   </div>
  -->
   <div>
+    <header>
+      <!-- Named Slot -->
+      <slot name="header"></slot>
+    </header>
     <slot></slot>
   </div>
 </template>
