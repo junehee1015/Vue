@@ -1,6 +1,7 @@
 <template>
-  <!-- 사용자가 새 강의 목표를 추가할 수 있는 Component -->
+  <!-- Vue3 부터는 다중 root가 가능하다. (Fragment) -->
   <div>
+    <!-- 사용자가 새 강의 목표를 추가할 수 있는 Component -->
     <h2>Manage Goals</h2>
     <input type="text" ref="goal" />
     <button @click="setGoals">Set Goal</button>
