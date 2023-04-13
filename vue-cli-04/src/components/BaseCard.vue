@@ -15,15 +15,28 @@
   <div>
     <slot></slot>
   </div>
+
+  v-slot:이름 === #이름
  -->
   <div>
-    <header>
+    <!-- 
+      $slots의 정보로 header slot이 사용되지 않은 곳을 브라우저에서 안보이도록 처리.
+     -->
+    <header v-if="$slots.header">
       <!-- Named Slot -->
       <slot name="header"></slot>
     </header>
     <slot></slot>
   </div>
 </template>
+
+<script>
+export default {
+  mounted() {
+    console.log(this.$slots.header);
+  }
+}
+</script>
 
 <style scoped>
 div {
@@ -32,5 +45,10 @@ div {
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   padding: 1rem;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>

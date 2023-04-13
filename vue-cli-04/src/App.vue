@@ -7,6 +7,16 @@
       :info-text="activeUser.description"
       :role="activeUser.role"
     ></user-info>
+
+    <!-- Slot에서 data를 가져오는 방법 -->
+    <!-- slotData(커스텀 이름)은 항상 객체이다. -->
+    <slot-data #default="slotData">
+      <!-- Slot이 하나일 때 template 태그를 생략할 수 있다. -->
+      <!-- <template> -->
+      <h2>{{ slotData.item }}</h2>
+      <p>{{ slotData['anotherProp'] }}</p>
+      <!-- </template> -->
+    </slot-data>
   </div>
 </template>
 
