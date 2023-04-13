@@ -17,6 +17,24 @@
       <p>{{ slotData['anotherProp'] }}</p>
       <!-- </template> -->
     </slot-data>
+
+    <button @click="setSelectedComponent('manage-goals')">Manage Goals</button>
+    <button @click="setSelectedComponent('active-goals')">Active Goals</button>
+
+    <!-- component가 많아지면 코드가 길어진다. -->
+    <p>keep alive (X)</p>
+    <manage-goals v-if="selectedComponent === 'manage-goals'"></manage-goals>
+    <active-goals v-if="selectedComponent === 'active-goals'"></active-goals>
+
+    <!-- v-if문을 사용하지 않고 동적으로 component를 사용할 수 있다. -->
+    <!-- component 태그에는 항상 is 속성을 포함한다. -->
+    <!-- 다른 component가 활성화 될 때 비활성화 된 component의 data는 제거된다. -->
+    <!-- 하지만 keep-alive 태그를 사용하여 data가 제거되지 않도록 할 수 있다. -->
+    <p>keep alive (O)</p>
+    <keep-alive>
+      <component :is="selectedComponent"></component>
+    </keep-alive>
+      
   </div>
 </template>
 
@@ -25,6 +43,8 @@
 import TheHeader from './components/TheHeader.vue';
 import BadgeList from './components/BadgeList.vue';
 import UserInfo from './components/UserInfo.vue';
+import ManageGoals from './components/ManageGoals.vue';
+import ActiveGoals from './components/ActiveGoals.vue';
 
 export default {
   components: {
@@ -33,9 +53,12 @@ export default {
     TheHeader,
     BadgeList,
     UserInfo,
+    ManageGoals,
+    ActiveGoals,
   },
   data() {
     return {
+      selectedComponent: 'manage-goals',
       activeUser: {
         name: 'Maximilian Schwarzmüller',
         description: 'Site owner and admin',
@@ -43,6 +66,11 @@ export default {
       },
     };
   },
+  methods: {
+    setSelectedComponent(cmp) {
+      this.selectedComponent = cmp;
+    }
+  }
 };
 </script>
 
