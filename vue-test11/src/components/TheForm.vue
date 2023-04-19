@@ -19,7 +19,9 @@
     </div>
     <div class="form-control">
       <label for="referrer">How did you hear about us?</label>
-      <select id="referrer" name="referrer">
+      <!-- 드롭다운(select)는 option을 선택할 때 value의 값이 v-model에 저장된다. -->
+      <!-- 선택하는 것이기 때문에 value의 값 중 하나를 기본 값으로 정하는 것이 좋다. -->
+      <select id="referrer" name="referrer" v-model="referrer">
         <option value="google">Google</option>
         <option value="wom">Word of mouth</option>
         <option value="newspaper">Newspaper</option>
@@ -67,6 +69,7 @@ export default {
     return {
       userName: '',
       userAge: null,
+      referrer: 'google',
     };
   },
   methods: {
