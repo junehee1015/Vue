@@ -62,10 +62,17 @@
       </div>
     </div>
 
+    <div class="form-control">
+      <!-- custom component에 v-model을 사용하면 -->
+      <!-- props를 넘겨주고 emits으로 custom 이벤트를 한 것과 같다. -->
+      <!-- custom Component에 v-model === :model-value="" @update:modelValue="" -->
+      <rating-control v-model="rating"></rating-control>
+    </div>
+
     <!-- checkbox가 하나일 때에는 값이 Boolean으로 나타난다. -->
     <!-- data 값을 true / fasle로 초기화.  -->
     <div class="form-control">
-      <input type="checkbox" id="confirm-terms" name="confirm-terms">
+      <input type="checkbox" id="confirm-terms" name="confirm-terms" v-model="confirm">
       <label for="confirm-terms">Agree to terms of use?</label>
     </div>
     <div>
@@ -75,7 +82,12 @@
 </template>
 
 <script>
+import RatingControl from './RatingControl.vue'
+
 export default {
+  components: {
+    RatingControl,
+  },
   data() {
     return {
       userName: '',
@@ -84,12 +96,14 @@ export default {
       interest: [],
       how: null,
       confirm: false,
+      rating: null,
+
     };
   },
   methods: {
     submiyForm() {
-      console.log(this.interest);
-      console.log(this.how);
+      console.log(this.rating);
+      this.rating = null;
     }
   },
 }
